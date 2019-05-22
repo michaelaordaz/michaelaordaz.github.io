@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="img/pigeon.jpg" type="image/x-icon"/>
+    <title>Dependency Tree</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Pichon's Writing & Programming</h1>
+    </div>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/pigeon.jpg" width="40" height="40" alt="">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Programming Projects
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="ransac.html">Computer Vision Ransac</a>
+              <a class="dropdown-item active" href="deptree.html">NLP Dependency Tree</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Short Stories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="burninghouse.html">Burning House</a>
+              <a class="dropdown-item" href="bee.html">Bee!</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Dependency Tree</h1>
+      <h3>Generate Part of Speech and Sentence Dependencys with Machine Learning</h3>
+      <p>Parse the sentence based on "arc standard" transitions.
+          Following the "arc standard" approach to transition-based parsing, this
+          method creates a stack and a queue, where the input Deps start out on the
+          queue, are moved to the stack by SHIFT actions, and are combined in
+          head-dependent relations by LEFT_ARC and RIGHT_ARC actions.
+          This method does not determine which actions to take; those are provided by
+          the `get_action` argument to the method. That method will be called whenever
+          the parser needs a new action, and then the parser will perform whatever
+          action is returned. If `get_action` returns an invalid action (e.g., a
+          SHIFT when the queue is empty), an arbitrary valid action will be taken
+          instead.
+          <br>This method does not return anything; it modifies the `.head` field of the
+          Dep objects that were passed as input. Each Dep object's `.head` field is
+          assigned the value of its head's `.id` field, or "0" if the Dep object is
+          the root.
+          <br>:param deps: The sentence, a sequence of Dep objects, each representing one
+          of the words in the sentence.
+          <br>:param get_action: a function or other callable that takes the parser's
+          current stack and queue as input, and returns an "arc standard" action.
+          <br>:return: Nothing; the `.head` fields of the input Dep objects are modified..</p>
+          <p>This is the code that gives the oracle instructions to parse the Dependency Tree.</p>
+          <div class="card">
+            <div class="card-body">
+              <samp>    def __call__(self, stack: Sequence[Dep], queue: Sequence[Dep]) Action:
+                      """Returns the Oracle action for the given "arc standard" parser state.
+                      The oracle for an "arc standard" transition-based parser inspects the
+                      parser state and the reference parse (represented by the `.head` fields
+                      of the Dep objects) and:
+                      * Chooses LEFT_ARC if it produces a correct head-dependent relation
+                        given the reference parse and the current configuration.
+                      * Otherwise, chooses RIGHT_ARC if it produces a correct head-dependent
+                        relation given the reference parse and all of the dependents of the
+                        word at the top of the stack have already been assigned.
+                      * Otherwise, chooses SHIFT.
+                      The chosen action should be both:
+                      * Added to the `actions` member variable
+                      * Returned as the result of this method
+                      Note: this method should only be called on parser state based on the Dep
+                      objects that were passed to __init__; it should not be used for any
+                      other Dep objects.
+                      :param stack: The stack of the "arc standard" transition-based parser.
+                      :param queue: The queue of the "arc standard" transition-based parser.
+                      :return: The action that should be taken given the reference parse
+                      (the `.head` fields of the Dep objects).
+                      """
+                      <br>if len(stack) < 2:  # Not enough members on stack
+                          <br>self.actions.append(Action.SHIFT)
+                          <br>return Action.SHIFT
+                      <br>elif stack[-1].head == stack[-2].id:  # Right arc
+                          <br>topid = stack[-1].id  # Check conditions
+                          <br>for i in range(len(stack)):
+                              <br>if stack[i].head == topid:
+                                  <br>self.actions.append(Action.SHIFT)
+                                  <br>return Action.SHIFT
+                          <br>for i in range(len(queue)):
+                              <br>if queue[i].head == topid:
+                                  <br>self.actions.append(Action.SHIFT)
+                                  <br>return Action.SHIFT
+                          <br>self.actions.append(Action.RIGHT_ARC)
+                          <br>return Action.RIGHT_ARC
+                      <br>elif stack[-1].id == stack[-2].head:  # Left arc
+                          <br>self.actions.append(Action.LEFT_ARC)
+                          <br>return Action.LEFT_ARC
+                      <br>else:  # Otherwise shift
+                          <br>self.actions.append(Action.SHIFT)
+                          <br>return Action.SHIFT</samp>
+                </div>
+              </div>
+            <p>Predicts an action for the given "arc standard" parser state.
+                There are no restrictions on how this prediction may be made, but a
+                typical approach would be to convert the parser state into features,
+                and then use the machine learning model (trained in `__init__`) to make
+                the prediction.
+                <br>:param stack: The stack of the "arc standard" transition-based parser.
+                <br>:param queue: The queue of the "arc standard" transition-based parser.
+                <br>:return: The action that should be taken.</p>
+          <p>This is the code to get the parses</p>
+          <div class="card">
+            <div class="card-body">
+              <samp>pos_seq = []  # list of pos that are predicted
+                    <br>flist = []  # list of features from input
+                    <br>prev_pos = 's'  # Set the first pos tag to start of sentence
+                    <br>for token in tokens:
+                        <br>frow = self.dV.transform([{'token': token, 'pos-1': prev_pos, 'is_numeric': token.isdigit()}])
+                        <br>flist.append(frow)  # add the new row to the list of predicted
+                        <br>prev_posidx = self.clf.predict(frow)  # predict the pos
+                        <br>prev_pos = self.le.inverse_transform(prev_posidx)[0]  # get the pos tag from label encoder
+                        <br>pos_seq.append(prev_pos)  # add the tag to return
+                        <br>
+                    <br>featMat = flist[0]  # add the first feature to the feature list
+                    <br>for row in range(1, len(flist)):
+                        <br>featMat = vstack([featMat, flist[row]]).toarray()  # Store the data into matrix with the rest of features
+                        <br>
+                    <br>return featMat, pos_seq</samp>
+            </div>
+          </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $('.carousel').carousel({
+        interval: 10000
+      })
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    </script>
+  </body>
+</html>

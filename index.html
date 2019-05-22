@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="img/pigeon.jpg" type="image/x-icon"/>
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Pichon's Writing & Programming</h1>
+    </div>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/pigeon.jpg" width="40" height="40" alt="">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Programming Projects
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="ransac.html">Computer Vision Ransac</a>
+              <a class="dropdown-item" href="deptree.html">NLP Dependency Tree</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Short Stories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="burninghouse.html">Burning House</a>
+              <a class="dropdown-item" href="bee.html">Bee!</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="d-flex justify-content-center">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom: 30px; width: 700px;">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="container">
+                  <img class="d-block w-100" src="img/burninghouse.jpg" alt="First slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5><a href = "burninghouse.html" style="color:white">Burning House</a></h5>
+                    <p>An original story about a girl. who finds herself at a crossroads with her mother.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <img class="d-block w-100" src="img/supermarine.jpg" alt="Second slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5><a href = "bee.html" style="color:white">Bee!</a></h5>
+                    <p>An original story about a RAF fighter pilot</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <img class="d-block w-100" src="img/ransac.jpg" alt="Third slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5 class="whiteIm"><a href = "ransac.html" style="color:white">Computer Vision</a></h5>
+                    <p class="whiteIm">A project that implements RANSAC to match images.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                  <img class="d-block w-100" src="img/deptree.png" alt="Fourth slide">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5 class="whiteIm"><a href = "deptree.html" style="color:white">Dependency Tree</a></h5>
+                    <p class="whiteIm">Creating Dependency Trees with Natural Language Processing and Machine Learning</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+      </div>
+      </div>
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="img/burninghouse.jpg" alt="card image"></p>
+                                    <h4 class="card-title">Burning House</h4>
+                                    <p>Short Story</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4">
+                                    <h4 class="card-title">Burning House</h4>
+                                    <p class="card-text">After being awoken by missed calls from her family, Olivia needs to come to terms with her own mother's moratlity.</p>
+                                    <a href="burninghouse.html">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                        <div class="mainflip">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src="img/supermarine.jpg" alt="card image"></p>
+                                        <h4 class="card-title">Bee!</h4>
+                                        <p>Short Story</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">Bee!</h4>
+                                        <p class="card-text">A RAF fighter pilot during World War 2 finds himself over the English Channel alone. When the Luftwaffe decends on him he must fight for his life.</p>
+                                        <a href="bee.html">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                            <div class="mainflip">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <p><img class=" img-fluid" src="img/ransac.jpg" alt="card image"></p>
+                                            <h4 class="card-title">RANSAC</h4>
+                                            <p>Programming Project</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 class="card-title">RANSAC</h4>
+                                            <p class="card-text">Using homography we can identify objects from an image in a video. With the implementaion of RANSAC we can make it more accurate.</p>
+                                            <a href="ransac.html">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4">
+                            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                                <div class="mainflip">
+                                    <div class="frontside">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <p><img class=" img-fluid" src="img/deptree.png" alt="card image"></p>
+                                                <h4 class="card-title">Dependency Tree</h4>
+                                                <p>Programming Project</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="backside">
+                                        <div class="card">
+                                            <div class="card-body text-center mt-4">
+                                                <h4 class="card-title">Dependency Tree</h4>
+                                                <p class="card-text">Identifying part of speech tags and sentence dependencys. Done by creating an oracle that is controlled with logistic regression.</p>
+                                                <a href="deptree.html">Read More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $('.carousel').carousel({
+        interval: 7500
+      })
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    </script>
+  </body>
+</html>

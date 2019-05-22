@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="img/pigeon.jpg" type="image/x-icon"/>
+    <title>Ransac</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Pichon's Writing & Programming</h1>
+    </div>
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/pigeon.jpg" width="40" height="40" alt="">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Programming Projects
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item active" href="ransac.html">Computer Vision Ransac</a>
+              <a class="dropdown-item" href="deptree.html">NLP Dependency Tree</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Short Stories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="burninghouse.html">Burning House</a>
+              <a class="dropdown-item" href="bee.html">Bee!</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>RANSAC Homography</h1>
+      <h3>Match objects in videos to an image of the object.</h3>
+      <p>Given a data file of 300 points, and told that approximately 25% of them could be considered
+          to lie on a good line. We used a threshold to determine the inliers, using a random sampling size s = 6 and
+          a maximum sample distance d = 0.1. These values were chosen somewhat arbitrarily; we experimented with
+          different values until we arrived at a fit that appeared good and consistent. The first values we tried were s = 2
+          and d = 2, but this proved to be too small of a sample and too wide of a margin to give accurate and consistent
+          results. We also attempted values in the range of s = 75 with d = 1, but could not find an adequate match given
+          those parameters. We eventually found s = 2 and d = 0.1 to provide good results, and increased s as high as we
+          could while being able to consistently find a working sample in the range.
+          Using the perpendicular distance from our fitted line as a measurement of the error, the error of our fitted
+          line is RMSE = 1.0558.</p>
+          <div class="row">
+            <div class="col-sm">
+              <div class="card" style="width: 30rem;">
+                <div class="card-header">
+                  <h6 class="text-center">Data Unfitted</h6>
+                </div>
+                  <img src="img/partA_scatter.png" alt="Ransac" class="img-fluid rounded">
+              </div>
+            </div>
+            <div class="col-sm">
+              <div class="card" style="width: 30rem;">
+                <div class="card-header">
+                  <h6 class="text-center">RANSAC Line Fit</h6>
+                </div>
+                  <img src="img/partA_ransac.png" alt="Ransac" class="img-fluid rounded">
+              </div>
+            </div>
+          </div>
+          <p>This is the code that was used in order to get the ransac output</p>
+          <div class="card">
+            <div class="card-body">
+              <samp>sampleSize = 6; % number of M to sample per trial
+                    <br>maxDistance = .1; % max allowable distance for inliers
+                    <br>
+                    <br>fitLineFcn = @(M) polyfit(M(:,1),M(:,2),1); % fit function using polyfit
+                    <br>evalLineFcn = ...   % distance evaluation function
+                      <br>@(model, M) sum((M(:, 2) - polyval(model, M(:,1))).^2,2);
+                      <br>
+                    <br>[modelRANSAC, inlierIdx] = ransac(M,fitLineFcn,evalLineFcn, ...
+                      sampleSize,maxDistance);
+                      <br>
+                    <br>modelInliers = polyfit(M(inlierIdx,1),M(inlierIdx,2),1);
+                    <br>
+                    <br>inlierPts = M(inlierIdx,:);
+                    <br>x = [min(inlierPts(:,1)) max(inlierPts(:,1))];
+                    <br>y = modelInliers(1)*x + modelInliers(2);
+                    <br>plot(x, y, 'g-')
+                    <br>scatter(inlierPts(:,1),inlierPts(:,2),'r');
+                    <br>hold off
+                    <br>
+                    <br>sum = 0;
+                    <br>%Get the RMS error.
+                    <br>for i = 1:length(M(:,1))
+                    <br>    sum = ((modelInliers(1)*(M(i,1))+modelInliers(2)) - M(i,2))^2 + sum;
+                    <br>end
+                    <br>RMSError = sqrt(sum/(length(M(:,1))));</samp>
+                </div>
+              </div>
+            <p>In order to improve keypoint matching to search for a set of N keypoints that agreed with our homography, we
+                used RANSAC. To get the mappings we pulled our nearest neighbor mappings from regular point matching. With these
+                mappings however we had to be sure that multiple slide points did not map to one frame point. To alleviate this
+                we only kept the unique matchings from set. To keep the mapping consistent we had to keep N small. In this
+                case we fixed it to size 6. Making N bigger resulted in a worst fitting. However, even with a small N it was clear
+                that the RANSAC method, provided better results. This is becuase it was able to get rid of the outliers that
+                were apart of the image previously. In terms of all the tests including the ones from the nearest neighbor point matching, we have that
+                Nearest Neighbor provided the worst results.</p>
+                <div class="row">
+                  <div class="col-sm">
+                    <div class="card" style="width: 30rem;">
+                      <div class="card-header">
+                        <h6 class="text-center">Nearest Neighbor</h6>
+                      </div>
+                        <img src="img/nn1.jpg" alt="NN" class="img-fluid rounded">
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="card" style="width: 30rem;">
+                      <div class="card-header">
+                        <h6 class="text-center">With RANSAC</h6>
+                      </div>
+                        <img src="img/ransac1.jpg" alt="Ransac" class="img-fluid rounded">
+                    </div>
+                  </div>
+                </div>
+          <p>This is the code to get the matches</p>
+          <div class="card">
+            <div class="card-body">
+              <samp>function b = generateHomography(slide1Img, frame1Img, M1, M2)
+                     <br>
+                        <br>CM = getCrossMat(M1,M2);
+                     <br>
+                        <br>%Now solve for H using homogenous linear least sqaures
+                        <br>H = getHomography(CM);
+                        <br>XY = [];
+                        <br>for i = 1:length(M2)
+                            <br>x = H(1,:) * [M1(i,1), M1(i,2), 1]';
+                            <br>y = H(2,:) * [M1(i,1), M1(i,2), 1]';
+                            <br>w = H(3,:) * [M1(i,1), M1(i,2), 1]';
+                            <br>XY(i,1) = x/w;
+                            <br>XY(i,2) = y/w;
+                        <br>end
+
+                        <br>XY = abs(XY)
+                        <br>%Draw the squares that they fall on
+                        <br>for i = 1:length(M2)
+                            <br>frame1Img = drawSq(M2(i,1), M2(i,2), 'e', frame1Img);
+                            <br>%round(XY(i,1))
+                            <br>%round(XY(i,2))
+                            <br>frame1Img = drawSq(round(XY(i,1)), round(XY(i,2)), 'b', frame1Img);
+                        <br>end</samp>
+            </div>
+          </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $('.carousel').carousel({
+        interval: 10000
+      })
+      $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    </script>
+  </body>
+</html>
