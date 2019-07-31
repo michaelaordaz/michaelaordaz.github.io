@@ -1,0 +1,67 @@
+body {
+  background-color: #FFFFFF; /*#F0EAD6;*/
+}
+
+.navbar-default {
+    background-color: #FFFFFF;
+}
+
+.container-fluid {
+  background-color: #D3D3D3;
+}
+
+.row {
+    margin: 0px 0px 0px 0px;
+    }
+
+.img-rounded {
+    max-width: 100px;
+    max-height: 100px;
+    margin: 10px 50px 10px 50px;
+    -webkit-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    }
+
+.carousel-inner {
+  /* make sure your .items will get correct height */
+  height: 100%;
+}
+
+
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007b5e;
+    border-color: #007b5e;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.carousel-item {
+  margin-top: 0px;
+  height: 500px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+}
