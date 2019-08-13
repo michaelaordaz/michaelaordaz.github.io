@@ -1,13 +1,16 @@
 body {
   background-color: #FFFFFF; /*#F0EAD6;*/
+  color: inherit;
 }
 
 .navbar-default {
     background-color: #FFFFFF;
+    color: inherit;
 }
 
 .container-fluid {
   background-color: #D3D3D3;
+  color: inherit;
 }
 
 .row {
