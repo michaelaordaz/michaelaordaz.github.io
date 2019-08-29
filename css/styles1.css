@@ -8,15 +8,6 @@ body {
     color: inherit;
 }
 
-.container-fluid {
-  background-color: #D3D3D3;
-  color: inherit;
-}
-
-.row {
-    margin: 0px 0px 0px 0px;
-    }
-
 .img-rounded {
     max-width: 100px;
     max-height: 100px;
@@ -60,11 +51,21 @@ section .section-title {
 
 .carousel-item {
   margin-top: 0px;
-  height: 500px;
+  height: 400px;
   overflow: hidden;
   width: 100%;
 }
 
 .carousel-item img {
   width: 100%;
+}
+
+/*To get the logos to scroll*/
+div.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
