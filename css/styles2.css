@@ -26,7 +26,6 @@ section {
 section .section-title {
     text-align: center;
     color: #007b5e;
-    margin-bottom: 50px;
     text-transform: uppercase;
 }
 
@@ -123,15 +122,16 @@ section .section-title {
 }
 
 .frontside .card .card-body img {
-    width: 170px;
-    height: 170px;
-    border-radius: 10%;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
 }
 
 .jumbotron {
   background-image: url("../img/bannerGreen.png");
   background-size: cover;
   color: white;
+  margin-bottom: 0px;
 }
 
 .float-left {

@@ -60,6 +60,17 @@ section .section-title {
   width: 100%;
 }
 
+/*Center the text on the carousel*/
+.text-box {
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	right: 15%;
+	color: #fff;
+	text-align: center;
+	transform: translateY(-50%);
+}
+
 /*To get the logos to scroll*/
 div.scrollmenu {
   overflow: auto;
