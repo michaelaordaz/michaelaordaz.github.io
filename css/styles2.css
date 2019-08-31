@@ -113,12 +113,12 @@ section .section-title {
 
 .backside .card a {
     font-size: 18px;
-    color: #007b5e !important;
+    color: #131879 !important;
 }
 
 .frontside .card .card-title,
 .backside .card .card-title {
-    color: #131879 !important;
+    color:#008000 !important;
 }
 
 .frontside .card .card-body img {
