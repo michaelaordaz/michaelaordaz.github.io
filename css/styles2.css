@@ -5,6 +5,115 @@
     background: #eee !important;
 }
 
+.contactbox {
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    font-family: 'Lato', sans-serif;
+
+    -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
+z-index: 999;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.contactbox--tray {
+    bottom: -350px;
+}
+
+.contactbox .form-control:focus {
+    border-color: #1f2836;
+}
+
+.contactbox__title,
+.contactbox__body {
+    border-bottom: none;
+}
+
+.contactbox__title {
+    min-height: 50px;
+    padding-right: 10px;
+    background-color: #1f2836cc;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    cursor: pointer;
+
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.contactbox__title h5 {
+    height: 50px;
+    margin: 0 0 0 15px;
+    line-height: 50px;
+    position: relative;
+    padding-left: 20px;
+
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+.contactbox__title h5 a {
+    color: #fff;
+    max-width: 195px;
+    display: inline-block;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.contactbox__title__tray span {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-bottom: 2px solid #fff
+}
+
+.contactbox__body {
+    padding: 15px;
+    border-top: 0;
+    background-color:#DCDCDC;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+}
+
+.contactbox__body {
+    overflow-y: auto;
+}
+
+.contactbox--empty.contactbox--tray {
+    bottom: -212px;
+}
+
+/*======================Chat Box Ends=====================================================*/
+
+/*
+.boxS {
+  position: sticky;
+  background: green;
+  height: 100px;
+  width: 100px;
+  top: 75%;
+  transform: translateY(-75%);
+  left: 85%;
+  transform: translateX(-85%);
+  z-index: 9998!important;
+}
+*/
+
 .btn-primary:hover,
 .btn-primary:focus {
     background-color: #108d6f;
