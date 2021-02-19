@@ -40,7 +40,7 @@ z-index: 999;
 .contactbox__title {
     min-height: 50px;
     padding-right: 10px;
-    background-color: #1f2836cc;
+    background-color: green;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     cursor: pointer;
@@ -124,7 +124,7 @@ z-index: 999;
 
 .btn-primary {
     color: #fff;
-    background-color: #007b5e;
+    background-color: green;
     border-color: #007b5e;
 }
 
